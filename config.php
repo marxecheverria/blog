@@ -4,10 +4,10 @@
  */
 
 // Configuración de la base de datos
-define('DB_HOST', 'fdb1033.awardspace.net');
-define('DB_NAME', '4650827_documentos');
-define('DB_USER', '4650827_documentos');
-define('DB_PASS', 'Tristania1201'); 
+if (!defined('DB_HOST')) define('DB_HOST', 'fdb1033.awardspace.net');
+if (!defined('DB_NAME')) define('DB_NAME', '4650827_documentos');
+if (!defined('DB_USER')) define('DB_USER', '4650827_documentos');
+if (!defined('DB_PASS')) define('DB_PASS', 'Tristania1201'); 
 
 
 
@@ -17,10 +17,12 @@ define('DB_PASS', 'Tristania1201');
 date_default_timezone_set('America/Guayaquil');
 
 // Configuración de sesiones
-ini_set('session.cookie_httponly', 1);
-ini_set('session.use_only_cookies', 1);
-ini_set('session.cookie_secure', 0); // Cambiar a 1 en producción con HTTPS
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    ini_set('session.cookie_httponly', 1);
+    ini_set('session.use_only_cookies', 1);
+    ini_set('session.cookie_secure', 0); // Cambiar a 1 en producción con HTTPS
+    session_start();
+}
 
 // Configuración de errores (desactivar en producción)
 ini_set('display_errors', 1);
@@ -111,5 +113,3 @@ function sendJSON($data, $statusCode = 200) {
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
     exit;
 }
-?>
-
