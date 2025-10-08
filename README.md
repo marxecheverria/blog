@@ -18,9 +18,9 @@ Sistema completo de gestión de documentos con editor de texto enriquecido, desa
 
 - **Frontend**: HTML5, CSS3, JavaScript (ES6+)
 - **Editor**: Quill.js 1.3.6
-- **Backend**: PHP 7.4+ con PDO
+- **Backend**: PHP 8.0+ con PDO
 - **Base de datos**: MySQL 5.7+
-- **Servidor**: XAMPP (Apache + MySQL)
+- **Servidor**: Apache + MySQL (XAMPP local o hosting web)
 
 ## 📋 Requisitos
 
@@ -44,13 +44,22 @@ Coloca todos los archivos en `C:\xampp\htdocs\blog\`
 
 ### 3. Configurar conexión
 
-Abre `config.php` y verifica las credenciales:
+Abre `config.php` y ajusta las credenciales según tu entorno:
 
+**Para XAMPP (Local):**
 ```php
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'blog_documentos');
 define('DB_USER', 'root');
 define('DB_PASS', ''); // Vacío por defecto en XAMPP
+```
+
+**Para hosting web:**
+```php
+define('DB_HOST', 'tu-servidor-mysql.com');
+define('DB_NAME', 'tu_base_datos');
+define('DB_USER', 'tu_usuario');
+define('DB_PASS', 'tu_contraseña');
 ```
 
 ### 4. Iniciar servicios
@@ -181,16 +190,26 @@ En `dashboard.html` y `login.html`:
 - Verifica que MySQL esté activo en XAMPP
 - Ejecuta `database_v2.sql` en phpMyAdmin
 - Revisa las credenciales en `config.php`
+- Confirma que la base de datos exista
 
 ### No funciona el login
 - Verifica que la tabla `usuarios` exista
-- Confirma que se ejecutó `database_v2.sql`
+- Confirma que se ejecutó `database_v2.sql` completo
 - Borra cookies del navegador
+- Usa las credenciales correctas: `demo@sistema.com` / `admin123`
 
 ### El editor no aparece
 - Verifica tu conexión a internet (Quill.js usa CDN)
 - Revisa la consola del navegador (F12)
 - Limpia la caché del navegador
+- Verifica que JavaScript esté habilitado
+
+### Problemas en hosting web
+- Asegúrate de subir TODOS los archivos
+- Verifica los permisos de archivos (644 para PHP, HTML)
+- Confirma que PHP 8.0+ esté disponible
+- Revisa que las extensiones PDO y PDO_MySQL estén activas
+- Consulta los logs de error del servidor para detalles
 
 ## 📱 Responsive
 
@@ -200,6 +219,33 @@ El sistema es totalmente responsive:
 - Tablet (768px - 1024px)
 - Móvil (< 768px)
 
+## 🚀 Despliegue en Producción
+
+### Checklist antes de subir a hosting:
+
+1. ✅ Cambiar credenciales en `config.php`
+2. ✅ Ejecutar `database_v2.sql` en la BD del hosting
+3. ✅ Verificar que PHP 8.0+ esté disponible
+4. ✅ Confirmar extensiones PDO activadas
+5. ✅ Subir todos los archivos vía FTP/cPanel
+6. ✅ Ajustar permisos de archivos si es necesario
+7. ✅ Probar el login y las funcionalidades principales
+
+### Archivos del Sistema (10 archivos)
+
+```
+✅ index.html          → Punto de entrada
+✅ login.html          → Autenticación
+✅ dashboard.html      → Interfaz principal
+✅ styles.css          → Estilos
+✅ app.js              → Lógica frontend
+✅ config.php          → Configuración
+✅ auth.php            → Autenticación backend
+✅ api.php             → API REST
+✅ database_v2.sql     → Script de BD
+✅ README.md           → Documentación
+```
+
 ## 📄 Licencia
 
 Este proyecto es de código abierto y está disponible para uso personal y educativo.
@@ -208,6 +254,10 @@ Este proyecto es de código abierto y está disponible para uso personal y educa
 
 Sistema desarrollado como ejemplo de gestión de documentos con editor WYSIWYG.
 
+**Repositorio:** [https://github.com/marxecheverria/blog](https://github.com/marxecheverria/blog)
+
 ---
 
 **¡Disfruta gestionando tus documentos!** 📚✨
+
+**Versión:** 2.0 - Sistema limpio y optimizado
