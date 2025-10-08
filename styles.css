@@ -282,6 +282,15 @@ body {
     background: var(--border-color);
 }
 
+.btn-close {
+    background: #6b7280;
+    color: white;
+}
+
+.btn-close:hover {
+    background: #4b5563;
+}
+
 /* Documentos */
 .documents-grid {
     display: grid;
@@ -796,6 +805,15 @@ body.dark-theme .btn-secondary {
 
 body.dark-theme .btn-secondary:hover {
     background: var(--border-color);
+}
+
+body.dark-theme .btn-close {
+    background: #6b7280;
+    color: white;
+}
+
+body.dark-theme .btn-close:hover {
+    background: #9ca3af;
 }
 
 body.dark-theme .modal-close {

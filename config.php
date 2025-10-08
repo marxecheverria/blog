@@ -1,7 +1,7 @@
 <?php
 /**
  * Configuración de conexión a la base de datos
- */
+
 
 // Configuración de la base de datos
 if (!defined('DB_HOST')) define('DB_HOST', 'fdb1033.awardspace.net');
@@ -9,8 +9,12 @@ if (!defined('DB_NAME')) define('DB_NAME', '4650827_documentos');
 if (!defined('DB_USER')) define('DB_USER', '4650827_documentos');
 if (!defined('DB_PASS')) define('DB_PASS', 'Tristania1201'); 
 
+ */
 
-
+ define('DB_HOST', 'localhost');
+ define('DB_NAME', 'blog_documentos');
+ define('DB_USER', 'root');
+ define('DB_PASS', ''); // Vacío por defecto en XAMPP
 
 
 // Configuración de zona horaria
