@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Documentos v2.0</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .loader {
+            text-align: center;
+            color: white;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader">
+        <div class="spinner"></div>
+        <p>Cargando...</p>
+    </div>
+    
+    <script>
+        // Verificar autenticación y redirigir
+        fetch('auth.php?action=check')
+            .then(res => res.json())
+            .then(data => {
+                if (data.authenticated) {
+                    window.location.href = 'dashboard.html';
+                } else {
+                    window.location.href = 'login.html';
+                }
+            })
+            .catch(() => {
+                window.location.href = 'login.html';
+            });
+    </script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Documentos</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Quill CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-book-open"></i>
+                    <span>DocSystem</span>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" data-view="documents">
+                        <i class="fas fa-folder-open"></i>
+                        <span>Mis Documentos</span>
+                        <span class="badge" id="docCount">0</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="createNewDocument()">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Nuevo Documento</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-view="search">
+                        <i class="fas fa-search"></i>
+                        <span>Buscar</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-view="stats">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Estadísticas</span>
+                    </a>
+                </li>
+            </nav>
+
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-details">
+                    <h4 id="userName">Usuario</h4>
+                    <p id="userEmail">email@ejemplo.com</p>
+                </div>
+                <button class="logout-btn" id="logoutBtn" title="Cerrar sesión">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <main class="main-content">
+            <!-- Topbar -->
+            <header class="topbar">
+                <h1 class="page-title" id="pageTitle">Mis Documentos</h1>
+                <div class="topbar-actions">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Buscar documento..." id="quickSearch">
+                    </div>
+                    <button class="btn-icon" id="themeToggle" title="Cambiar tema">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="btn-icon" id="notificationsBtn" title="Notificaciones">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Vista: Mis Documentos -->
+            <div class="view active" id="viewDocuments">
+                <div class="documents-grid" id="documentsGrid">
+                    <div class="loading">
+                        <i class="fas fa-spinner"></i>
+                        <p>Cargando documentos...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vista: Nuevo Documento -->
+            <div class="view" id="viewNew">
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <input type="text" class="editor-title" id="docTitle" placeholder="Título del documento...">
+                        <div class="editor-actions">
+                            <button class="btn btn-success" id="saveBtn">
+                                <i class="fas fa-save"></i> Guardar
+                            </button>
+                            <button class="btn btn-danger" id="deleteBtn">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="editor-body">
+                        <div id="quillEditor"></div>
+                    </div>
+                    <div class="editor-footer">
+                        <span id="wordCount">0 palabras</span>
+                        <span id="charCount">0 caracteres</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vista: Buscar -->
+            <div class="view" id="viewSearch">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <h2 class="search-title">Buscar en tus documentos</h2>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Escribe para buscar...">
+                    <div id="searchResults"></div>
+                </div>
+            </div>
+
+            <!-- Vista: Estadísticas -->
+            <div class="view" id="viewStats">
+                <h2>Estadísticas</h2>
+                <div class="stats-container" id="statsContainer">
+                    <div class="stat-card">
+                        <div class="stat-icon documents">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalDocs">0</h3>
+                            <p>Documentos</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon words">
+                            <i class="fas fa-pen"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalWords">0</h3>
+                            <p>Palabras</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon views">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalViews">0</h3>
+                            <p>Visualizaciones</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Confirmar</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="modalMessage">¿Estás seguro?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="modalCancel">Cancelar</button>
+                <button class="btn btn-danger" id="modalConfirm">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-info-circle"></i>
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

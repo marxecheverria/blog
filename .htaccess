@@ -1,0 +1,65 @@
+# Sistema de Gestión de Documentos - .htaccess
+
+# Habilitar motor de reescritura
+RewriteEngine On
+
+# Forzar HTTPS (descomenta en producción)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Prevenir acceso directo a archivos de configuración
+<FilesMatch "^(config\.php|database\.sql)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Proteger el archivo .htaccess
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Desactivar listado de directorios
+Options -Indexes
+
+# Establecer página de error personalizada (opcional)
+# ErrorDocument 404 /blog/404.html
+
+# Configurar tipo de contenido y codificación
+AddDefaultCharset UTF-8
+AddCharset UTF-8 .html .css .js .php
+
+# Habilitar compresión GZIP
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Configurar caché del navegador
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+</IfModule>
+
+# Headers de seguridad
+<IfModule mod_headers.c>
+    # Prevenir clickjacking
+    Header always set X-Frame-Options "SAMEORIGIN"
+    
+    # Prevenir MIME type sniffing
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # Habilitar XSS Protection
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Política de referencia
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Limitar tamaño de subida de archivos (ajustar según necesidad)
+php_value upload_max_filesize 10M
+php_value post_max_size 10M
+
