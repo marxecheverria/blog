@@ -9,6 +9,7 @@ Sistema completo de gestión de documentos con editor de texto enriquecido, desa
 - ✅ **Gestión completa de documentos** (crear, editar, eliminar)
 - ✅ **Búsqueda** de documentos por título y contenido
 - ✅ **Estadísticas** de productividad
+- ✅ **Tema oscuro/claro** con toggle
 - ✅ **Interfaz moderna** y responsive
 - ✅ **API REST** completa
 - ✅ **Diseño limpio** y funcional
@@ -98,6 +99,12 @@ O crea tu propia cuenta desde el login.
 
 1. Ve a **"Estadísticas"** en la barra lateral
 2. Verás métricas de tus documentos
+
+### Cambiar tema
+
+1. Haz clic en el icono de **luna/sol** en la barra superior
+2. El tema cambiará entre claro y oscuro
+3. Tu preferencia se guarda automáticamente
 
 ## ⌨️ Atajos de Teclado
 

@@ -100,6 +100,9 @@ function setupEventListeners() {
     // Logout
     document.getElementById('logoutBtn').addEventListener('click', logout);
     
+    // Tema
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    
     // Modal
     document.getElementById('modalClose').addEventListener('click', closeModal);
     document.getElementById('modalCancel').addEventListener('click', closeModal);
@@ -107,6 +110,9 @@ function setupEventListeners() {
     
     // Quill editor
     quill.on('text-change', updateWordCount);
+    
+    // Aplicar tema guardado
+    applySavedTheme();
 }
 
 // Mostrar vista
@@ -437,6 +443,64 @@ async function logout() {
     } catch (error) {
         console.error('Error cerrando sesión:', error);
         window.location.href = 'login.html';
+    }
+}
+
+// Toggle tema oscuro/claro
+function toggleTheme() {
+    const body = document.body;
+    const isDark = body.classList.contains('dark-theme');
+    
+    if (isDark) {
+        body.classList.remove('dark-theme');
+        localStorage.setItem('theme', 'light');
+        updateThemeIcon('light');
+    } else {
+        body.classList.add('dark-theme');
+        localStorage.setItem('theme', 'dark');
+        updateThemeIcon('dark');
+    }
+    
+    // Guardar preferencia en el servidor
+    saveThemePreference(!isDark ? 'dark' : 'light');
+}
+
+// Aplicar tema guardado
+function applySavedTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    const body = document.body;
+    
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-theme');
+    } else {
+        body.classList.remove('dark-theme');
+    }
+    
+    updateThemeIcon(savedTheme);
+}
+
+// Actualizar icono del tema
+function updateThemeIcon(theme) {
+    const icon = document.querySelector('#themeToggle i');
+    if (icon) {
+        if (theme === 'dark') {
+            icon.className = 'fas fa-sun';
+        } else {
+            icon.className = 'fas fa-moon';
+        }
+    }
+}
+
+// Guardar preferencia de tema en el servidor
+async function saveThemePreference(theme) {
+    try {
+        await fetch(`${AUTH_URL}?action=update_theme`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ tema: theme })
+        });
+    } catch (error) {
+        console.error('Error guardando tema:', error);
     }
 }
 

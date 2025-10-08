@@ -690,3 +690,118 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--text-secondary);
 }
+
+/* ================================================
+   TEMA OSCURO
+   ================================================ */
+body.dark-theme {
+    --primary-color: #6C7DD2;
+    --secondary-color: #1A202C;
+    --accent-color: #5AE4A8;
+    --text-primary: #F7FAFC;
+    --text-secondary: #CBD5E0;
+    --bg-color: #111827;
+    --white: #1F2937;
+    --border-color: #374151;
+}
+
+body.dark-theme .sidebar {
+    background: var(--primary-color);
+}
+
+body.dark-theme .main-content {
+    background: var(--bg-color);
+}
+
+body.dark-theme .topbar {
+    background: var(--white);
+    border-bottom-color: var(--border-color);
+}
+
+body.dark-theme .document-card {
+    background: var(--white);
+    border-color: var(--border-color);
+}
+
+body.dark-theme .document-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .editor-container {
+    background: var(--white);
+}
+
+body.dark-theme .editor-header {
+    background: var(--secondary-color);
+    border-bottom-color: var(--border-color);
+}
+
+body.dark-theme .editor-footer {
+    background: var(--secondary-color);
+}
+
+body.dark-theme .stat-card {
+    background: var(--white);
+    border-color: var(--border-color);
+}
+
+body.dark-theme .modal-content {
+    background: var(--white);
+}
+
+body.dark-theme .search-input {
+    background: var(--white);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-theme .search-input:focus {
+    border-color: var(--accent-color);
+}
+
+body.dark-theme .search-box input {
+    background: var(--white);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-theme .search-box input:focus {
+    border-color: var(--accent-color);
+}
+
+body.dark-theme .btn-icon {
+    background: var(--secondary-color);
+    color: var(--text-primary);
+}
+
+body.dark-theme .btn-icon:hover {
+    background: var(--accent-color);
+    color: var(--primary-color);
+}
+
+body.dark-theme .action-btn {
+    background: var(--secondary-color);
+    color: var(--text-primary);
+}
+
+body.dark-theme .action-btn:hover {
+    background: var(--accent-color);
+    color: var(--primary-color);
+}
+
+body.dark-theme .btn-secondary {
+    background: var(--secondary-color);
+    color: var(--text-primary);
+}
+
+body.dark-theme .btn-secondary:hover {
+    background: var(--border-color);
+}
+
+body.dark-theme .modal-close {
+    color: var(--text-secondary);
+}
+
+body.dark-theme .modal-close:hover {
+    color: var(--text-primary);
+}
