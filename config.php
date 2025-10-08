@@ -4,10 +4,10 @@
  */
 
 // Configuración de la base de datos
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'blog_documentos');
-define('DB_USER', 'root');
-define('DB_PASS', ''); // Cambiar si tienes contraseña en XAMPP
+define('DB_HOST', 'fdb1033.awardspace.net');
+define('DB_NAME', '4650827_documentos');
+define('DB_USER', '4650827_documentos');
+define('DB_PASS', 'Tristania1201'); 
 
 
 
