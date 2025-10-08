@@ -119,7 +119,7 @@ O crea tu propia cuenta desde el login.
 
 - `Ctrl + S` → Guardar documento
 - `Ctrl + N` → Nuevo documento
-- `Esc` → Cerrar modal
+- `Esc` → Cerrar modal / Cerrar editor
 
 ## 📁 Estructura de Archivos
 

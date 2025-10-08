@@ -92,6 +92,7 @@ function setupEventListeners() {
     // Botones del editor
     document.getElementById('saveBtn').addEventListener('click', saveDocument);
     document.getElementById('deleteBtn').addEventListener('click', confirmDelete);
+    document.getElementById('closeEditorBtn').addEventListener('click', closeEditor);
     
     // Búsqueda
     document.getElementById('searchInput').addEventListener('input', performSearch);
@@ -545,6 +546,31 @@ function stripHtml(html) {
     return div.textContent || div.innerText || '';
 }
 
+// Cerrar editor
+function closeEditor() {
+    // Verificar si hay cambios sin guardar
+    const title = document.getElementById('docTitle').value.trim();
+    const content = quill.root.innerHTML;
+    
+    // Si hay contenido sin guardar, preguntar
+    if ((title || content !== '<p><br></p>') && !currentDocument) {
+        showModal(
+            '¿Cerrar sin guardar?',
+            'Tienes cambios sin guardar. ¿Estás seguro de que deseas cerrar el editor?',
+            () => {
+                // Confirmar: cerrar y volver a documentos
+                currentDocument = null;
+                showView('documents');
+                closeModal();
+            }
+        );
+    } else {
+        // No hay cambios o ya está guardado, cerrar directamente
+        currentDocument = null;
+        showView('documents');
+    }
+}
+
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
@@ -583,6 +609,16 @@ document.addEventListener('keydown', (e) => {
         createNewDocument();
     }
     if (e.key === 'Escape') {
-        closeModal();
+        // Si hay un modal abierto, cerrarlo
+        const modal = document.getElementById('confirmModal');
+        if (modal && modal.classList.contains('show')) {
+            closeModal();
+        } else {
+            // Si no hay modal y estamos en el editor, cerrar el editor
+            const viewNew = document.getElementById('viewNew');
+            if (viewNew && viewNew.classList.contains('active')) {
+                closeEditor();
+            }
+        }
     }
 });
