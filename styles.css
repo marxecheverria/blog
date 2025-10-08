@@ -283,12 +283,12 @@ body {
 }
 
 .btn-close {
-    background: #6b7280;
+    background: #620e79;
     color: white;
 }
 
 .btn-close:hover {
-    background: #4b5563;
+    background: #7c1a95;
 }
 
 /* Documentos */
@@ -808,12 +808,12 @@ body.dark-theme .btn-secondary:hover {
 }
 
 body.dark-theme .btn-close {
-    background: #6b7280;
+    background: #620e79;
     color: white;
 }
 
 body.dark-theme .btn-close:hover {
-    background: #9ca3af;
+    background: #8b2aad;
 }
 
 body.dark-theme .modal-close {
